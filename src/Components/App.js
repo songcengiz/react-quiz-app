@@ -124,10 +124,9 @@ function App() {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("data", JSON.stringify(data));
         dispatch({
           type: "start",
-          payload: JSON.parse(localStorage.getItem("data")),
+          payload: data,
         });
       })
       .catch((err) => dispatch({ type: "dataFailed", payload: err.message }));
