@@ -21,7 +21,7 @@
     "eject": "react-scripts eject",
     "server": "json-server --watch data/questions.json --port 8000"
   },
-  "proxy": "https://localhost:8000/questions",
+  "proxy": "http://localhost:8000",
   "eslintConfig": {
     "extends": [
       "react-app",
