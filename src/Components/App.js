@@ -32,7 +32,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: "started",
-        questions: JSON.parse(localStorage.getItem("data")),
+        questions: action.payload,
       };
     case "dataFailed":
       return { ...state, status: "error" };
@@ -42,6 +42,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: "ready",
+
         typeNumber: action.payload,
         secRemaining: state.questions.length * SEC_PER_QUESTION,
       };
@@ -118,15 +119,17 @@ function App() {
   useEffect(() => {
     localStorage.setItem("reviewQuestions", JSON.stringify(reviewQuestions));
   }, [reviewQuestions]);
+
   useEffect(() => {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
-      .then((data) =>
+      .then((data) => {
+        localStorage.setItem("data", JSON.stringify(data));
         dispatch({
           type: "start",
-          payload: localStorage.setItem("data", JSON.stringify(data)),
-        })
-      )
+          payload: JSON.parse(localStorage.getItem("data")),
+        });
+      })
       .catch((err) => dispatch({ type: "dataFailed", payload: err.message }));
   }, []);
 
