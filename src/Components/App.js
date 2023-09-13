@@ -32,7 +32,7 @@ function reducer(state, action) {
       return {
         ...state,
         status: "started",
-        questions: action.payload,
+        questions: JSON.parse(localStorage.getItem("data")),
       };
     case "dataFailed":
       return { ...state, status: "error" };
@@ -121,7 +121,12 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "start", payload: data }))
+      .then((data) =>
+        dispatch({
+          type: "start",
+          payload: localStorage.setItem("data", JSON.stringify(data)),
+        })
+      )
       .catch((err) => dispatch({ type: "dataFailed", payload: err.message }));
   }, []);
 
