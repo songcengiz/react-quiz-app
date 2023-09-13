@@ -29,10 +29,11 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "start":
+      const storageData = localStorage.getItem("dataQuiz");
       return {
         ...state,
         status: "started",
-        questions: action.payload,
+        questions: storageData ? JSON.parse(storageData) : [],
       };
     case "dataFailed":
       return { ...state, status: "error" };
@@ -124,9 +125,9 @@ function App() {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
       .then((data) => {
+        localStorage.setItem("dataQuiz", JSON.stringify(data));
         dispatch({
           type: "start",
-          payload: data,
         });
       })
       .catch((err) => dispatch({ type: "dataFailed", payload: err.message }));
