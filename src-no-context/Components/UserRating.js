@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { useQuiz } from "../contexts/QuizContext";
-function UserRating() {
-  const { color, maxRating = 10, userRating, dispatch } = useQuiz();
+function UserRating({ color, maxRating = 10, userRating, dispatch }) {
   const [templateRate, setTemplateRate] = useState(0);
   return (
     <div>

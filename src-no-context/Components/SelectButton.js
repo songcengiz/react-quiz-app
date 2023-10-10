@@ -1,8 +1,4 @@
-import { useQuiz } from "../contexts/QuizContext";
-
-function SelectButton() {
-  const { typeNumber, dispatch } = useQuiz();
-
+function SelectButton({ typeNumber, dispatch }) {
   return (
     <div className="start">
       <h3>Choose Level of the Questions🍩</h3>

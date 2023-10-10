@@ -1,14 +1,5 @@
-import { useQuiz } from "../contexts/QuizContext";
-
-function ReviewQuestions() {
-  const { reviewQuestions, index, secCompleted } = useQuiz();
-  const {
-    que,
-    index: index2,
-    correctOption,
-    options,
-    secRemaining,
-  } = reviewQuestions.at(index);
+function ReviewQuestions({ reviewQuestions, secCompleted }) {
+  const { que, index, correctOption, options, secRemaining } = reviewQuestions;
   const secFinished = secCompleted - secRemaining;
   const min = Math.ceil(Math.abs(secFinished / 60));
   const sec = Math.floor(Math.abs(secFinished % 60));
@@ -29,7 +20,7 @@ function ReviewQuestions() {
           <button
             key={i}
             disabled
-            className={`btn btn-option ${index2 === i ? "answer" : ""} ${
+            className={`btn btn-option ${index === i ? "answer" : ""} ${
               i === correctOption ? "correct" : "wrong"
             }`}
           >

@@ -1,9 +1,5 @@
-import { useQuiz } from "../contexts/QuizContext";
-
-function Questions() {
-  const { questionsFilter, answer, dispatch, secRemaining, index } = useQuiz();
-
-  const { question: que, options, correctOption } = questionsFilter.at(index);
+function Questions({ question, answer, dispatch, secRemaining }) {
+  const { question: que, options, correctOption } = question;
 
   const hasAnswer = answer !== null;
 
